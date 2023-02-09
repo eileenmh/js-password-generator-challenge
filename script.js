@@ -1,13 +1,50 @@
+
+
 function getCharacterCount() {
-  let characterCount = prompt ("How long do you want your password to be? Enter a number greater than or equal to 8 and less than or equal to 128.");
-  if (isNaN(characterCount)) {
-    return "The value you entered is not a number. Please try again."
-  } else {
-    return "The value is a number."
+  let characterCount = prompt ("How long do you want your password to be? Enter a whole number greater than or equal to 8 and less than or equal to 128.");
+  if ( characterCount >= 8 && characterCount <= 128 ) {
+    console.log("Success!")
+  }
+  else {
+    if (isNaN(characterCount)) { // check that it's a numeric value
+    alert (characterCount + " is not a numeric value. Please try again.");
+    } 
+    else if ( characterCount % 1 !=0 ) { // check that it's a whole number
+    alert (characterCount + " is not a whole number. Please try again.");
+    }
+  getCharacterCount();
   }
 }
+getCharacterCount();
+//     else if ( ) { // check that it's greater than or equal to 8
 
-console.log(getCharacterCount())
+//     }
+//   //   else if ( ) { // check that it's less than or equal to 128
+//   //   getCharacterCount();
+//   //   }
+//   // }
+
+// }
+
+//   getCharacterCount();
+
+//   ( isNaN(characterCount) ) {
+//     alert ("The value you entered is not a numeric value. Please try again.");
+//     getCharacterCount();
+//   } 
+//   else if (characterCount % 1 != 0) {
+//     alert ("Please enter a whole number.");
+//     getCharacterCount();
+//   }
+//   else if ( characterCount < 8 ) {
+//     alert ()
+//     } else if ( characterCount > 128 ) {
+
+//     }
+//   }
+// }
+
+// console.log(getCharacterCount())
 
 // ORIGINAL CODE
 // // Get references to the #generate element
@@ -23,4 +60,4 @@ console.log(getCharacterCount())
 // }
 
 // // Add event listener to generate button
-// generateBtn.addEventListener("click", writePassword);
+/* generateBtn.addEventListener("click", writePassword) */
