@@ -1,16 +1,20 @@
-
-
 function getCharacterCount() {
   let characterCount = prompt ("How long do you want your password to be? Enter a whole number greater than or equal to 8 and less than or equal to 128.");
-  if ( characterCount >= 8 && characterCount <= 128 ) {
+  if (characterCount >= 8 && characterCount <= 128) {
     console.log("Success!")
   }
   else {
-    if (isNaN(characterCount)) { // check that it's a numeric value
-    alert (characterCount + " is not a numeric value. Please try again.");
+    if (isNaN(characterCount)) {
+      alert (characterCount + " is not a numeric value. Please try again.");
     } 
-    else if ( characterCount % 1 !=0 ) { // check that it's a whole number
-    alert (characterCount + " is not a whole number. Please try again.");
+    else if (characterCount % 1 != 0) {
+      alert (characterCount + " is not a whole number. Please try again.");
+    }
+    else if (characterCount < 8) {
+      alert (characterCount + " is lower than the character count minimum of 8. Please try again.")
+    }
+    else {
+      alert (characterCount + " is higher than the character count maximum of 128. Please try again.")
     }
   getCharacterCount();
   }
