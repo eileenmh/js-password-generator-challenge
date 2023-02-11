@@ -1,4 +1,4 @@
-// ✅ let user choose a password length between 7 and 129 characters and validate the response
+// choose a password length between 7 and 129 characters and validate the response
 function getCharacterCount() {
   var characterCount = prompt ("How long do you want your password to be? Enter a number between 7 and 129. Numbers with decimal points will not be accepted.");
     if (characterCount !== null && characterCount.length !== 0) {
@@ -16,7 +16,7 @@ function getCharacterCount() {
       }
   }
 }
-// ✅ let users select which character types they want to include
+// select which character types they want to include
 function getPasswordCharacters() {
   function CharacterSet (name, array, include) {
     this.name = name;
@@ -54,33 +54,31 @@ function getPasswordCharacters() {
   }
 }
 
-var passwordLength = getCharacterCount();
-var passwordCharacters = getPasswordCharacters();
-var password = [];
+// take results of both functions above and use them to create a password
+function generatePassword() {
+  var passwordLength = getCharacterCount();
+  var passwordCharacters = getPasswordCharacters();
+  var password = [];
 
-// randomly select characters
-for (let i = 0; i < passwordLength; i++) {
-
-  let randomIndex = Math.floor(Math.random() * passwordCharacters.length);
-  password = password.concat(passwordCharacters[randomIndex]);
+  // randomly select characters
+  for (let i = 0; i < passwordLength; i++) {
+    let randomIndex = Math.floor(Math.random() * passwordCharacters.length);
+    password = password.concat(passwordCharacters[randomIndex]);
+  }
+  return password.join('');
 }
-console.log(password.join(''));
-// combine arrays that have been selected
-// run a loop, number of times will be characterCount, and the loop function is to get a random number, and then put that random number in to select an array, and concatenate that selection to the end of the variable
 
+// Get references to the #generate element
+var generateBtn = document.querySelector("#generate");
 
-// ORIGINAL CODE
-// // Get references to the #generate element
-// var generateBtn = document.querySelector("#generate");
+// Write password to the #password input
+function writePassword() {
+  var password = generatePassword();
+  var passwordText = document.querySelector("#password");
 
-// // Write password to the #password input
-// function writePassword() {
-//   var password = generatePassword();
-//   var passwordText = document.querySelector("#password");
+  passwordText.value = password;
 
-//   passwordText.value = password;
+}
 
-// }
-
-// // Add event listener to generate button
-/* generateBtn.addEventListener("click", writePassword)*/
+// Add event listener to generate button
+generateBtn.addEventListener("click", writePassword)
