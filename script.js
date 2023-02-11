@@ -1,3 +1,22 @@
+// ✅ let user choose a password length between 7 and 129 characters and validate the response
+function getCharacterCount() {
+  var characterCount = prompt ("How long do you want your password to be? Enter a number between 7 and 129. Numbers with decimal points will not be accepted.");
+    if (characterCount !== null && characterCount.length !== 0) {
+      if (isNaN(characterCount) || characterCount % 1 != 0) {
+        alert ("The value you entered is invalid. It must be a whole number between 7 and 129. Please try again.");
+        getCharacterCount();
+      } 
+      else if (characterCount < 8 || characterCount > 128) {
+        alert ("Your password must be more than 7 and less than 129 characters in length. Please try again.");
+        getCharacterCount();
+      }
+      else {
+        alert ("Your password will contain " + characterCount + " characters. You will now be prompted to select whether or not to include lowercase, uppercase, numeric, and/or special characters. You must select yes for at least one option. Click 'OK' to continue.");
+        return characterCount;
+      }
+  }
+}
+// ✅ let users select which character types they want to include
 function getPasswordCharacters() {
   function CharacterSet (name, array, include) {
     this.name = name;
@@ -34,26 +53,10 @@ function getPasswordCharacters() {
     return selectedCharacters;
   }
 }
+
+var passwordLength = getCharacterCount();
 var passwordCharacters = getPasswordCharacters();
-console.log (passwordCharacters);
-//✅ let user choose a password length between 7 and 129 characters and validate the response
-// function getCharacterCount() {
-//   var characterCount = prompt ("How long do you want your password to be? Enter a number between 7 and 129. Numbers with decimal points will not be accepted.");
-//     if (characterCount !== null && characterCount.length !== 0) {
-//       if (isNaN(characterCount) || characterCount % 1 != 0) {
-//         alert ("The value you entered is invalid. It must be a whole number between 7 and 129. Please try again.");
-//         getCharacterCount();
-//       } 
-//       else if (characterCount < 8 || characterCount > 128) {
-//         alert ("Your password must be more than 7 and less than 129 characters in length. Please try again.");
-//         getCharacterCount();
-//       }
-//       else {
-//         alert ("Your password will contain " + characterCount + " characters. You will now be prompted to select whether or not to include lowercase, uppercase, numeric, and/or special characters. You must select yes for at least one option. Click 'OK' to continue.");
-//       }
-//   }
-// }
-// getCharacterCount();
+
 
 // combine arrays that have been selected
 // run a loop, number of times will be characterCount, and the loop function is to get a random number, and then put that random number in to select an array, and concatenate that selection to the end of the variable
