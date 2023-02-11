@@ -56,8 +56,15 @@ function getPasswordCharacters() {
 
 var passwordLength = getCharacterCount();
 var passwordCharacters = getPasswordCharacters();
+var password = [];
 
+// randomly select characters
+for (let i = 0; i < passwordLength; i++) {
 
+  let randomIndex = Math.floor(Math.random() * passwordCharacters.length);
+  password = password.concat(passwordCharacters[randomIndex]);
+}
+console.log(password.join(''));
 // combine arrays that have been selected
 // run a loop, number of times will be characterCount, and the loop function is to get a random number, and then put that random number in to select an array, and concatenate that selection to the end of the variable
 
