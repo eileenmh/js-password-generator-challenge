@@ -1,21 +1,41 @@
-function CharacterSet (name, array, include) {
-  this.name = name;
-  this.array = array;
-  this.include = include;
+function getPasswordCharacters() {
+  function CharacterSet (name, array, include) {
+    this.name = name;
+    this.array = array;
+    this.include = include;
+  }
+  const lowercaseCh = new CharacterSet ("lowercase", Array.from("abcdefghijklmnopqrstuvwxyz"), false);
+  const uppercaseCh = new CharacterSet ("uppercase", Array.from("ABCDEFGHIJKLMNOPQRSTUVWXYZ"), false);
+  const numberCh = new CharacterSet ("numeric", Array.from("123456789"), false);
+  const specialCh = new CharacterSet ("special", Array.from("!#$%&()*+-.,/:;<=>?@[]^_`{}|~"), false);
+
+  var selectedCharacters = []
+  // this should probably be a loop but I'm not sure how to set it up...
+  lowercaseCh.include = confirm("Would you like to include " + lowercaseCh.name.toUpperCase() + " characters? Click 'OK' for yes, 'Cancel' for no.");
+  if (lowercaseCh.include) {
+    var selectedCharacters = selectedCharacters.concat(lowercaseCh.array);
+  };
+  uppercaseCh.include = confirm("Would you like to include " + uppercaseCh.name.toUpperCase() + " characters? Click 'OK' for yes, 'Cancel' for no.");
+  if (uppercaseCh.include) {
+    var selectedCharacters = selectedCharacters.concat(uppercaseCh.array);
+  }
+  numberCh.include = confirm("Would you like to include " + numberCh.name.toUpperCase() + " characters? Click 'OK' for yes, 'Cancel' for no.");
+  if (numberCh.include) {
+    var selectedCharacters = selectedCharacters.concat(numberCh.array);
+  }
+  specialCh.include = confirm("Would you like to include " + specialCh.name.toUpperCase() + " characters? Click 'OK' for yes, 'Cancel' for no.");
+  if (specialCh.include) {
+    var selectedCharacters = selectedCharacters.concat(specialCh.array);
+  }
+  if (selectedCharacters.length == 0) {
+    alert ("ERROR: you must select at least one character type. The character selection menu will start over."); 
+    getPasswordCharacters(); //to debug later - the function gets returned as undefined if you don't select a charactertype and the function starts over here
+  } else {
+    return selectedCharacters;
+  }
 }
-const lowercaseCh = new CharacterSet ("lowercase", Array.from("abcdefghijklmnopqrstuvwxyz"), false);
-const uppercaseCh = new CharacterSet ("uppercase", Array.from("ABCDEFGHIJKLMNOPQRSTUVWXYZ"), false);
-const numberCh = new CharacterSet ("numeric", Array.from("123456789"), false);
-const specialCh = new CharacterSet ("special", Array.from("!#$%&()*+-.,/:;<=>?@[]^_`{}|~"), false);
-
-var selectedCharacters
-lowercaseCh.include = confirm("Would you like to include " + lowercaseCh.name + " characters? Click 'OK' for yes, 'Cancel' for no.");
-if (lowercaseCh.include) {
-  var selectedCharacters = lowercaseCh.array;
-};
-
-console.log(selectedCharacters);
-
+var passwordCharacters = getPasswordCharacters();
+console.log (passwordCharacters);
 //✅ let user choose a password length between 7 and 129 characters and validate the response
 // function getCharacterCount() {
 //   var characterCount = prompt ("How long do you want your password to be? Enter a number between 7 and 129. Numbers with decimal points will not be accepted.");
