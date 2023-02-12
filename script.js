@@ -4,11 +4,11 @@ function getCharacterCount() {
     if (characterCount !== null && characterCount.length !== 0) {
       if (isNaN(characterCount) || characterCount % 1 != 0) {
         alert ("The value you entered is invalid. It must be a whole number between 7 and 129. Please try again.");
-        getCharacterCount();
+        return getCharacterCount();
       } 
       else if (characterCount < 8 || characterCount > 128) {
         alert ("Your password must be more than 7 and less than 129 characters in length. Please try again.");
-        getCharacterCount();
+        return getCharacterCount();
       }
       else {
         alert ("Your password will contain " + characterCount + " characters. You will now be prompted to select whether or not to include lowercase, uppercase, numeric, and/or special characters. You must select yes for at least one option. Click 'OK' to continue.");
@@ -28,27 +28,20 @@ function getPasswordCharacters() {
   const numberCh = new CharacterSet ("numeric", Array.from("123456789"), false);
   const specialCh = new CharacterSet ("special", Array.from("!#$%&()*+-.,/:;<=>?@[]^_`{}|~"), false);
 
+  const charSets = [lowercaseCh, uppercaseCh, numberCh, specialCh];
+
   var selectedCharacters = []
-  // this should probably be a loop but I'm not sure how to set it up...
-  lowercaseCh.include = confirm("Would you like to include " + lowercaseCh.name.toUpperCase() + " characters? Click 'OK' for yes, 'Cancel' for no.");
-  if (lowercaseCh.include) {
-    var selectedCharacters = selectedCharacters.concat(lowercaseCh.array);
-  };
-  uppercaseCh.include = confirm("Would you like to include " + uppercaseCh.name.toUpperCase() + " characters? Click 'OK' for yes, 'Cancel' for no.");
-  if (uppercaseCh.include) {
-    var selectedCharacters = selectedCharacters.concat(uppercaseCh.array);
-  }
-  numberCh.include = confirm("Would you like to include " + numberCh.name.toUpperCase() + " characters? Click 'OK' for yes, 'Cancel' for no.");
-  if (numberCh.include) {
-    var selectedCharacters = selectedCharacters.concat(numberCh.array);
-  }
-  specialCh.include = confirm("Would you like to include " + specialCh.name.toUpperCase() + " characters? Click 'OK' for yes, 'Cancel' for no.");
-  if (specialCh.include) {
-    var selectedCharacters = selectedCharacters.concat(specialCh.array);
-  }
+  charSets.forEach(charSet => {
+    charSet.include = confirm("Would you like to include " + charSet.name.toUpperCase() + " characters? Click 'OK' for yes, 'Cancel' for no.");
+    if (charSet.include) {
+      selectedCharacters = selectedCharacters.concat(charSet.array);
+    }
+  });
+
+//Check that a character type has been selected
   if (selectedCharacters.length == 0) {
     alert ("ERROR: you must select at least one character type. The character selection menu will start over."); 
-    getPasswordCharacters(); //to debug later - the function gets returned as undefined if you don't select a charactertype and the function starts over here
+    return getPasswordCharacters(); //to debug later - the function gets returned as undefined if you don't select a charactertype and the function starts over here
   } else {
     return selectedCharacters;
   }
